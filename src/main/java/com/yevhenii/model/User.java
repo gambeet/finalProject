@@ -3,9 +3,6 @@ package com.yevhenii.model;
 import javax.persistence.*;
 import java.util.Collection;
 
-/**
- * Created by Yevhenii on 28.11.2017.
- */
 @Entity
 public class User {
     private int id;

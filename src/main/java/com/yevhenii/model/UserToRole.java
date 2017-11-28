@@ -2,9 +2,6 @@ package com.yevhenii.model;
 
 import javax.persistence.*;
 
-/**
- * Created by Yevhenii on 28.11.2017.
- */
 @Entity
 public class UserToRole {
     private int id;
