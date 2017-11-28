@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>WebApp</title>
 </head>
 <body>
+
+<form enctype="multipart/form-data" method="post"  action="#" th:action="@{/rest/upload}">
+    Upload file to server
+    <input type="file" name="file"/>
+    <input type="submit" value="Submit"/>
+</form>
+
+<form method="post" action="#" th:action="@{/rest/download}">
+    Download file from server
+    <input type="text" name="name"/>
+    <input type="submit" value="Submit"/>
+</form>
+
+<form method="post" action="#" th:action="@{/rest/get   }">
+    POST REST request
+    <input type="text" name="name" />
+    <input type="submit" value="Submit"/>
+</form>
 
 </body>
 </html>
