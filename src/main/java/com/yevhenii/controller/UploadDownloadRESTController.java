@@ -1,5 +1,8 @@
 package com.yevhenii.controller;
 
+import com.yevhenii.model.ForFiles;
+import com.yevhenii.service.ForFilesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -20,6 +23,9 @@ import java.nio.file.Paths;
 @Controller
 @RequestMapping("/rest")
 public class UploadDownloadRESTController {
+
+    @Autowired
+    ForFilesService service;
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public @ResponseBody
     String handleFileUpload(
@@ -29,10 +35,10 @@ public class UploadDownloadRESTController {
             String name = file.getOriginalFilename();
             try {
                 byte[] bytes = file.getBytes();
-                BufferedOutputStream stream =
-                        new BufferedOutputStream(new FileOutputStream(new File(name)));
-                stream.write(bytes);
-                stream.close();
+                ForFiles f = new ForFiles();
+                f.setName(name);
+                f.setData(bytes);
+                service.save(f);
                 return "You successfully uploaded file into " + name;
             } catch (Exception e) {
                 return "You failed to upload " + name + " => " + e.getMessage();
@@ -46,7 +52,7 @@ public class UploadDownloadRESTController {
     HttpEntity<byte[]> getFile(
             @RequestParam(value = "name") String name) throws IOException {
 
-        byte[] file= Files.readAllBytes(Paths.get(name));
+        byte[] file = service.getByName(name).getData();
         HttpHeaders header = new HttpHeaders();
         header.set("Content-Disposition", "attachment; filename=" + name);
         header.setContentLength(file.length);

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-public class User {
+public class User implements Comparable<User> {
     private int id;
     private String login;
     private String password;
@@ -69,5 +69,16 @@ public class User {
 
     public void setUserToRolesById(Collection<UserToRole> userToRolesById) {
         this.userToRolesById = userToRolesById;
+    }
+
+    @Override
+    public int compareTo(User o) {
+        if(login.compareTo(o.getLogin()) > 0){
+            return 1;
+        }else if(login.compareTo(o.getLogin())< 0 ){
+            return -1;
+        }else {
+            return 0;
+        }
     }
 }

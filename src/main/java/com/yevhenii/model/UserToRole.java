@@ -10,6 +10,7 @@ public class UserToRole {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue
     public int getId() {
         return id;
     }

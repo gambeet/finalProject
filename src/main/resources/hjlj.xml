@@ -9,6 +9,7 @@
       <mapping class="com.yevhenii.model.Role"/>
       <mapping class="com.yevhenii.model.User"/>
       <mapping class="com.yevhenii.model.UserToRole"/>
+      <mapping class="com.yevhenii.model.ForFiles"/>
       <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
 
