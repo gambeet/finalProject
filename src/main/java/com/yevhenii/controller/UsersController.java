@@ -18,7 +18,7 @@ public class UsersController {
     @Autowired
     private UsersService usersService;
 
-    @RequestMapping()
+    @RequestMapping("/{algorithm}")
     public String list(@PathVariable("algorithm") String algorithm, Model model){
         List<User> users = usersService.getAll();
         System.out.println(users.get(0).getUserToRolesById().size());
@@ -32,9 +32,12 @@ public class UsersController {
             case "insert":
                 SortingUsers.insertSort(arr);
                 break;
-            default:
+            case "quick":
                 SortingUsers.quickSort(arr);
                 break;
+                default:
+                    algorithm = "NOT SORTED";
+                    break;
         }
 
         List sortedList = new ArrayList();
@@ -42,6 +45,7 @@ public class UsersController {
             sortedList.add(user);
         }
         model.addAttribute("sortedUsers", sortedList);
+        model.addAttribute("algorithm", algorithm);
         return "users";
     }
 }
